@@ -3,29 +3,10 @@ import SearchBar from "./SearchBar";
 // import SearchResultsList from "./SearchResultsList";
 
 export default function Header(props) {
-  // const [results, setResults] = useState([]);
-  // const [input, setInput] = useState("");
-
-  // const fetchData = (value) => {
-  //   fetch(
-  //     "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid={67263f61c34be6002f3dec2554277cb1}"
-  //   ).then(
-  //     (response) => response.json().then((json) => console.log(json))
-  //     //   {
-  //     //   const results = json.filter((location) => {
-  //     //     return (
-  //     //       value && location && location.name.toLowerCase().includes(value)
-  //     //     );
-  //     //   });
-  //     //   setResults(results);
-  //     // })
-  //   );
-  // };
-
-  // const handleChange = (value) => {
-  //   fetchData(value);
-  //   setInput(value);
-  // };
+  function getCurLocation() {
+    props.getLocation();
+    props.search(props.location.latitude, props.location.longitude);
+  }
 
   return (
     <header className="header">
@@ -44,8 +25,8 @@ export default function Header(props) {
           <label className="site-search"></label>
           <SearchBar
             city={props.city}
-            setCity={props.setCity}
-            handleChange={props.handleChange}
+            onKeyDown={props.onKeyDown}
+            onChange={props.onChange}
           />
           {/* <SearchResultsList 
             city={props.city}
@@ -54,7 +35,7 @@ export default function Header(props) {
         </div>
       </form>
       {/* Current Location */}
-      <button className="location">
+      <button className="location" onClick={() => getCurLocation()}>
         <ion-icon name="locate" className="icon"></ion-icon>
         Current Location
       </button>
