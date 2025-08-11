@@ -1,3 +1,4 @@
+/* GENERAL */
 * {
   box-sizing: border-box;
 }
@@ -14,11 +15,7 @@
   --dark-grey: #444444;
   --black-accent: #111111;
   --accent-green: #4cbb17;
-  /* --background-color: linear-gradient(
-    90deg,
-    var(--full-white-60),
-    var(--medium-black)
-  ); */
+  /* --background-color: #377596; */
 }
 
 [data-theme="dark"] {
@@ -32,24 +29,29 @@
   --dark-grey: #d9d9d9;
   --black-accent: #d9d9d9;
   --accent-green: #4cbb17;
-  /* --background-color: linear-gradient(
-    90deg,
-    var(--full-white-60),
-    var(--medium-black)
-  ); */
+  /* --background-color: linear-gradient(90deg, #111111, #222222); */
 }
 
 body {
   margin: 0;
   font-family: "Hanken Grotesk", Arial, sans-serif;
-  /* background: var(--background-color); */
-  background: linear-gradient(90deg, var(--full-white-60), var(--medium-black));
-  color: var(--writing-color);
+  /* background-color: #d9d9d9; */
+  /* background-color: var(--background-color); */
+  background: linear-gradient(90deg, #ffffff, #292929);
   padding: 1rem;
   height: 100vh;
 }
 
-/* HEADER */
+.title-center {
+  margin: auto;
+  margin-top: 2rem;
+  font-size: 1.6rem;
+}
+
+p {
+  color: var(--dark-grey);
+}
+/* ***********HEADER**************/
 
 header {
   /* margin: 1rem; */
@@ -57,10 +59,6 @@ header {
   display: flex;
   align-items: center;
   gap: 10rem;
-}
-
-p {
-  color: var(--dark-grey);
 }
 
 /* Dark/light Mode */
@@ -168,6 +166,8 @@ input:checked + .slider::before {
   color: var(--writing-color);
 }
 
+/* ***********MAIN************* */
+
 /* CURRENT CITY CONTAINER */
 .current-city-container {
   width: 31.88rem;
@@ -186,27 +186,26 @@ input:checked + .slider::before {
 }
 
 .city {
-  /* width: 132px;
-  height: 54px; */
   font-size: 1.5rem;
 }
 
 .time {
-  font-size: 5rem;
+  font-size: 6rem;
   position: relative;
-  top: 2rem;
+  top: 0.8rem;
 }
 
-.date {
+.date-current-city {
   font-size: 1.3rem;
   position: relative;
-  top: -2rem;
+  top: -4rem;
 }
 
 /* HIGHLIGHTS SECTION */
 .highlights-container {
   width: 48.75rem;
   height: 20.63rem;
+  border-radius: 1.88rem;
   background-color: var(--container-color);
   box-shadow: 0px 0.1rem 1rem var(--dark-grey);
   margin: 0.8rem 2.5rem;
@@ -238,6 +237,22 @@ input:checked + .slider::before {
   margin: 3rem 1rem 0 0;
 }
 
+.icon-img {
+  width: 15rem;
+  height: 15rem;
+  margin-left: -2.5rem;
+}
+
+.weather-desc {
+  margin: 0 1.3rem;
+  font-size: 1.5rem;
+}
+
+.detail-info-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 /* Sun */
 
 .sun-container {
@@ -246,6 +261,7 @@ input:checked + .slider::before {
   grid-template-columns: 0.5fr 1fr;
   margin: -2rem 1rem -6rem;
 }
+
 .image-container {
   display: grid;
   grid-template-rows: 0.5fr 0.5fr;
@@ -268,4 +284,54 @@ input:checked + .slider::before {
 h4 {
   font-size: 1.2rem;
   margin-bottom: -1rem;
+}
+
+/* FORECAST SECTION */
+
+.forecast-section-container {
+  width: 25.9rem;
+  height: 22.9rem;
+  background-color: var(--container-color);
+  border-radius: 1.88rem;
+  box-shadow: 0px 0.1rem 1rem var(--dark-grey);
+  margin: 2rem 5.63rem;
+  display: grid;
+}
+
+/* Forecast */
+.forecast-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 2rem 1rem -2rem 0;
+}
+
+.icon-img-s {
+  width: 5rem;
+  height: 5rem;
+  margin-top: -4rem;
+  margin-left: 1rem;
+}
+
+.temp-date {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: -2.5rem;
+}
+
+.date {
+  font-size: 1.2rem;
+  margin-top: -2.5rem;
+  margin-left: -3rem;
+}
+
+/* HOURLY FORECAST */
+
+.hourly-forecast-container {
+  width: 54.4rem;
+  height: 22.9rem;
+  background-color: var(--container-color);
+  border-radius: 1.88rem;
+  box-shadow: 0px 0.1rem 1rem var(--dark-grey);
+  margin: 2rem -3rem;
+  display: grid;
 }
