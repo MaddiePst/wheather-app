@@ -1,10 +1,10 @@
 import CurrentCitySection from "./CurrentCitySection";
-import HighlightsSection from "../HighlightsSection";
-import ForecastSection from "../ForecastSection";
+import HighlightsSection from "./HighlightsSection";
+import ForecastSection from "./ForecastSection";
+import HourlyForecastSection from "../HourlyForecastSection";
 // import HourlyForecastSection from "./HourlyForecastSection";
 
 export default function Main(props) {
-  console.log(props);
   return (
     <main className="flex-container">
       <CurrentCitySection
@@ -13,8 +13,8 @@ export default function Main(props) {
         time={props.time}
       />
       <HighlightsSection weatherData={props.weatherData} />
-      <ForecastSection />
-      {/* <HourlyForecastSection /> */}
+      <ForecastSection futureWeatherData={props.futureWeatherData} />
+      <HourlyForecastSection futureWeatherData={props.futureWeatherData} />
     </main>
   );
 }

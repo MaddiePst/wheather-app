@@ -5,7 +5,7 @@ export default function CurrentCitySection(props) {
       <div className="writing-container">
         <h4 className="city">{props.city}</h4>
         <h1 className="time">{props.time}</h1>
-        <p className="date">{props.date}</p>
+        <p className="date-current-city">{props.date}</p>
       </div>
     </section>
   );
