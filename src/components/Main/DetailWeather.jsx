@@ -1,5 +1,4 @@
 export default function DetailWheather(props) {
-  // const percentage = "%";
   return (
     <div>
       {/* {props.img} */}

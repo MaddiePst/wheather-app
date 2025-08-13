@@ -8,27 +8,32 @@ export default function ForecastSection(props) {
         iconDate={props.futureWeatherData.icon1Date1}
         tempDate={props.futureWeatherData.time1Date1Temp}
         date={props.futureWeatherData.date1}
+        units={props.units}
       />
 
       <Forecast
         iconDate={props.futureWeatherData.icon1Date2}
         tempDate={props.futureWeatherData.time1Date2Temp}
         date={props.futureWeatherData.date2}
+        units={props.units}
       />
       <Forecast
         iconDate={props.futureWeatherData.icon1Date3}
         tempDate={props.futureWeatherData.time1Date3Temp}
         date={props.futureWeatherData.date3}
+        units={props.units}
       />
       <Forecast
         iconDate={props.futureWeatherData.icon1Date4}
         tempDate={props.futureWeatherData.time1Date4Temp}
         date={props.futureWeatherData.date4}
+        units={props.units}
       />
       <Forecast
         iconDate={props.futureWeatherData.icon1Date5}
         tempDate={props.futureWeatherData.time1Date5Temp}
         date={props.futureWeatherData.date5}
+        units={props.units}
       />
     </section>
   );

@@ -2,11 +2,10 @@ import Sun from "./Sun";
 import DetailWeather from "./DetailWeather";
 
 export default function HighlightsSection(props) {
-  // Why it gives me the wrong sunrise/sunset ?????
+  // Format tome for Sunrise and Sunset
   const sunriseH = props.weatherData.sunrise.getHours();
   const sunriseM = props.weatherData.sunrise.getMinutes();
   const sunriseFormatted = `${sunriseH}:${sunriseM} AM`;
-  // console.log(sunriseFormatted);
 
   const sunsetH = props.weatherData.sunset.getHours();
   const sunsetM = props.weatherData.sunset.getMinutes();
@@ -15,11 +14,15 @@ export default function HighlightsSection(props) {
   return (
     <section className="highlights-container">
       <div className="basic-info-container">
-        <h2 className="temperature">{props.weatherData.temperature}&deg;C</h2>
+        <button className="temperature" onClick={props.handleUnits}>
+          {props.weatherData.temperature}&deg;
+          {props.units === "metric" ? " C" : " F"}
+        </button>
         <p className="text">
           Feels like:{" "}
           <span className="feels-temperature">
-            {props.weatherData.feelsLike}&deg;C
+            {props.weatherData.feelsLike}&deg;
+            {props.units === "metric" ? " C" : " F"}
           </span>
         </p>
         <div className="rise-or-set-container">
@@ -49,12 +52,12 @@ export default function HighlightsSection(props) {
         <DetailWeather
           dataType="High"
           value={props.weatherData.high}
-          units={`\u00b0C `}
+          units={props.units === "metric" ? `\u00b0 C` : `\u00b0 F`}
         ></DetailWeather>
         <DetailWeather
           dataType="Low"
           value={props.weatherData.low}
-          units={`\u00b0C `}
+          units={props.units === "metric" ? `\u00b0 C` : `\u00b0 F`}
         ></DetailWeather>
 
         <DetailWeather
@@ -63,22 +66,35 @@ export default function HighlightsSection(props) {
           // }
           dataType="Humidity"
           value={props.weatherData.humidity}
-          units=" %"
+          units="%"
         ></DetailWeather>
         <DetailWeather
           dataType="Wind Speed"
-          value={props.weatherData.windSpeed}
-          units=" km/h"
+          value={
+            props.units === "metric"
+              ? props.weatherData.windSpeed
+              : Math.round(props.weatherData.windSpeed / 1.61)
+          }
+          units={props.units === "metric" ? " km/h" : ` mi/h`}
         ></DetailWeather>
         <DetailWeather
           dataType="Pressure"
-          value={props.weatherData.pressure}
-          units=" hPa"
+          value={
+            props.units === "metric"
+              ? props.weatherData.pressure
+              : Math.round(props.weatherData.pressure / 69)
+          }
+          units={props.units === "metric" ? " hPa" : " psi"}
         ></DetailWeather>
         <DetailWeather
           dataType="Visibility"
-          value={props.weatherData.visibility}
-          units=" km"
+          value={
+            props.units === "metric"
+              ? Math.round(props.weatherData.visibility / 1000)
+              : Math.round(props.weatherData.visibility / 1610)
+          }
+          // {`/1000` : ``}
+          units={props.units === "metric" ? " km" : ` mi`}
         ></DetailWeather>
       </div>
     </section>
