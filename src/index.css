@@ -15,7 +15,7 @@
   --dark-grey: #444444;
   --black-accent: #111111;
   --accent-green: #4cbb17;
-  /* --background-color: #377596; */
+  --hour-container: ;
 }
 
 [data-theme="dark"] {
@@ -25,19 +25,17 @@
   --full-white: #111111;
   --medium-black: #111111;
   /* --writing-color: #373636; */
-  /* --light-black: #373636; */
+  --light-black: #373636;
   --dark-grey: #d9d9d9;
   --black-accent: #d9d9d9;
   --accent-green: #4cbb17;
-  /* --background-color: linear-gradient(90deg, #111111, #222222); */
+  --hour-container: #373636;
 }
 
 body {
   margin: 0;
   font-family: "Hanken Grotesk", Arial, sans-serif;
-  /* background-color: #d9d9d9; */
-  /* background-color: var(--background-color); */
-  background: linear-gradient(90deg, #ffffff, #292929);
+  /* background: linear-gradient(90deg, #ffffff, #292929); */
   padding: 1rem;
   height: 100vh;
 }
@@ -214,15 +212,18 @@ input:checked + .slider::before {
 }
 
 .basic-info-container {
-  margin: -2.5rem 0.8rem 0 1.88rem;
+  margin: 1rem 0.8rem 0 1rem;
 }
 
 .temperature {
   font-size: 5rem;
+  background-color: var(--container-color);
+  color: var(--writing-color);
+  border: none;
 }
 
 .text {
-  margin: -5rem 0.3rem -1.88rem;
+  margin: -1rem 1rem -1.8rem;
   font-size: 1.2rem;
   font-weight: 500;
 }
@@ -244,7 +245,7 @@ input:checked + .slider::before {
 }
 
 .weather-desc {
-  margin: 0 1.3rem;
+  margin: auto 2rem;
   font-size: 1.5rem;
 }
 
@@ -334,4 +335,41 @@ h4 {
   box-shadow: 0px 0.1rem 1rem var(--dark-grey);
   margin: 2rem -3rem;
   display: grid;
+}
+
+/* Hour Forecast */
+
+.hourly-forecast {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0 4rem 0 5rem;
+}
+
+.hour-container {
+  width: 8.1rem;
+  height: 16.9rem;
+  /* background: linear-gradient(#f88508, #f6fad9); */
+  box-shadow: 0px 0.2rem 0.5rem var(--dark-grey);
+  border-radius: 2rem;
+  margin-right: 1rem;
+  padding: 0 0 0 2.5rem;
+  /* display: flex;
+  justify-content: center; */
+  /* align-items: center; */
+}
+
+.hour-bold {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.icon-hour {
+  width: 5rem;
+  height: 5rem;
+  margin: -1.8rem -1rem;
+}
+
+.hour-med-weight {
+  font-size: 1.1rem;
+  font-weight: 500;
 }

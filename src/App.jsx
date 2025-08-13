@@ -3,17 +3,21 @@ import "./index.css";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import { useState, useEffect } from "react";
+// import DataFetch from "./utils/DataFetch";
 
 export default function App() {
   // const API_KEY = "67263f61c34be6002f3dec2554277cb1";
+  //State variables definition
   const [isDark, setIsDark] = useState(false);
-  const [city, setCity] = useState("");
+
+  //State variables definition
+  const [error, setError] = useState(null);
   const [location, setLocation] = useState({
     latitude: null,
     longitude: null,
   });
-  const [error, setError] = useState(null);
-
+  const [units, setUnits] = useState("imperial");
+  const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState({
     temperature: null,
     feelsLike: null,
@@ -29,26 +33,12 @@ export default function App() {
     high: null,
     low: null,
   });
-
   const [futureWeatherData, setFutureWeatherData] = useState({
     date: new Date(null),
     time: null,
-    // temperature: null,
-    // feelsLike: null,
-    // sunrise: new Date(null),
-    // sunset: new Date(null),
-    // description: null,
-    // humidity: null,
-    // pressure: null,
-    // windSpeed: null,
-    // visibility: null,
-    // location: null,
-    // icon: null,
-    // high: null,
-    // low: null,
   });
 
-  // Get Current Location
+  // Get Current Location (when enter the website)
   const getLocation = () => {
     // Check if Geolocation API is available in the browser
     if (!navigator.geolocation) {
@@ -74,23 +64,11 @@ export default function App() {
     );
   };
 
-  console.log("Weather Data (initial): ", weatherData);
   console.log("Location (initial): ", location);
 
-  // Why the background doesn't toggle ????
-  function toggleDarkMode() {
-    setIsDark((prevIsDark) => !prevIsDark);
-  }
-
-  // Display  time and date for the location fetched
-  const now = new Date();
-  const date = now.toDateString();
-  const hour = now.getHours();
-  const minutes = now.getMinutes();
-  const formattedTime = `${hour}:${(minutes < 10 ? "0" : "") + minutes}`;
-
-  const callFunction = async (city) => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=67263f61c34be6002f3dec2554277cb1`;
+  // Set Lat and Lon on searched city
+  const searchCity = async (city) => {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}c&appid=67263f61c34be6002f3dec2554277cb1`;
     const response = await fetch(url);
     const dataCity = await response.json();
     console.log("City Data:", dataCity);
@@ -98,13 +76,14 @@ export default function App() {
       latitude: dataCity.coord.lat,
       longitude: dataCity.coord.lon,
     });
+    search(location.latitude, location.longitude);
   };
 
-  // fetching data for Today(live)
+  // fetching data for Today (Highlights Section)
   const search = async (latitude, longitude) => {
     if (latitude === null && longitude === null) return;
     try {
-      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=67263f61c34be6002f3dec2554277cb1`;
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${units}&appid=67263f61c34be6002f3dec2554277cb1`;
 
       const response = await fetch(url);
       const data = await response.json();
@@ -117,9 +96,9 @@ export default function App() {
         pressure: data.main.pressure,
         sunrise: new Date(data.sys.sunrise),
         sunset: new Date(data.sys.sunset),
-        description: data.weather[0].description,
+        description: data.weather[0].main,
         windSpeed: data.wind.speed,
-        visibility: data.visibility / 1000,
+        visibility: data.visibility,
         location: data.name,
         icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
         high: Math.round(data.main.temp_max),
@@ -130,11 +109,13 @@ export default function App() {
     }
   };
 
+  console.log("Weather Data (initial): ", weatherData);
+
   // fetching data for forecast Future Days and Multiple Hours
   const searchForecast = async (latitude, longitude) => {
     if (latitude === null && longitude === null) return;
     try {
-      const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=67263f61c34be6002f3dec2554277cb1`;
+      const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&appid=67263f61c34be6002f3dec2554277cb1`;
 
       const response = await fetch(url);
       const data2 = await response.json();
@@ -169,61 +150,86 @@ export default function App() {
         }, ${new Date(data2.list[0].dt_txt).getDate()} ${
           monthName[new Date(data2.list[0].dt_txt).getMonth() + 1]
         } `,
+
         time1Date1: `${new Date(data2.list[0].dt_txt).getHours()}:${
           (new Date(data2.list[0].dt_txt).getMinutes() < 10 ? "0" : "") +
           new Date(data2.list[0].dt_txt).getMinutes()
         }`,
         icon1Date1: `https://openweathermap.org/img/wn/${data2.list[0].weather[0].icon}@2x.png`,
+        icon1Desc: data2.list[0].weather[0].main,
         time1Date1Temp: Math.round(data2.list[0].main.temp),
+        tempHigh1: Math.round(data2.list[0].main.temp_max),
+        tempLow1: Math.round(data2.list[0].main.temp_min),
 
         time2Date1: `${new Date(data2.list[1].dt_txt).getHours()}:${
           (new Date(data2.list[1].dt_txt).getMinutes() < 10 ? "0" : "") +
           new Date(data2.list[1].dt_txt).getMinutes()
         }`,
         icon2Date1: `https://openweathermap.org/img/wn/${data2.list[1].weather[0].icon}@2x.png`,
+        icon2Desc: data2.list[1].weather[0].main,
         time2Date1Temp: Math.round(data2.list[1].main.temp),
+        tempHigh2: Math.round(data2.list[1].main.temp_max),
+        tempLow2: Math.round(data2.list[1].main.temp_min),
 
         time3Date1: `${new Date(data2.list[2].dt_txt).getHours()}:${
           (new Date(data2.list[2].dt_txt).getMinutes() < 10 ? "0" : "") +
           new Date(data2.list[2].dt_txt).getMinutes()
         }`,
         icon3Date1: `https://openweathermap.org/img/wn/${data2.list[2].weather[0].icon}@2x.png`,
+        icon3Desc: data2.list[2].weather[0].main,
         time3Date1Temp: Math.round(data2.list[2].main.temp),
+        tempHigh3: Math.round(data2.list[2].main.temp_max),
+        tempLow3: Math.round(data2.list[2].main.temp_min),
 
         time4Date1: `${new Date(data2.list[3].dt_txt).getHours()}:${
           (new Date(data2.list[3].dt_txt).getMinutes() < 10 ? "0" : "") +
           new Date(data2.list[3].dt_txt).getMinutes()
         }`,
         icon4Date1: `https://openweathermap.org/img/wn/${data2.list[3].weather[0].icon}@2x.png`,
+        icon4Desc: data2.list[3].weather[0].main,
         time4Date1Temp: Math.round(data2.list[3].main.temp),
+        tempHigh4: Math.round(data2.list[3].main.temp_max),
+        tempLow4: Math.round(data2.list[3].main.temp_min),
 
         time5Date1: `${new Date(data2.list[4].dt_txt).getHours()}:${
           (new Date(data2.list[4].dt_txt).getMinutes() < 10 ? "0" : "") +
           new Date(data2.list[4].dt_txt).getMinutes()
         }`,
         icon5Date1: `https://openweathermap.org/img/wn/${data2.list[4].weather[0].icon}@2x.png`,
+        icon5Desc: data2.list[4].weather[0].main,
         time5Date1Temp: Math.round(data2.list[4].main.temp),
+        tempHigh5: Math.round(data2.list[4].main.temp_max),
+        tempLow5: Math.round(data2.list[4].main.temp_min),
 
         time6Date1: `${new Date(data2.list[5].dt_txt).getHours()}:${
           (new Date(data2.list[5].dt_txt).getMinutes() < 10 ? "0" : "") +
           new Date(data2.list[5].dt_txt).getMinutes()
         }`,
         icon6Date1: `https://openweathermap.org/img/wn/${data2.list[5].weather[0].icon}@2x.png`,
+        icon6Desc: data2.list[5].weather[0].main,
         time6Date1Temp: Math.round(data2.list[5].main.temp),
+        tempHigh6: Math.round(data2.list[5].main.temp_max),
+        tempLow6: Math.round(data2.list[5].main.temp_min),
 
         time7Date1: `${new Date(data2.list[6].dt_txt).getHours()}:${
           (new Date(data2.list[6].dt_txt).getMinutes() < 10 ? "0" : "") +
           new Date(data2.list[6].dt_txt).getMinutes()
         }`,
         icon7Date1: `https://openweathermap.org/img/wn/${data2.list[6].weather[0].icon}@2x.png`,
+        icon7Desc: data2.list[6].weather[0].main,
         time7Date1Temp: Math.round(data2.list[6].main.temp),
+        tempHigh7: Math.round(data2.list[6].main.temp_max),
+        tempLow7: Math.round(data2.list[6].main.temp_min),
 
         time8Date1: `${new Date(data2.list[7].dt_txt).getHours()}:${
           (new Date(data2.list[7].dt_txt).getMinutes() < 10 ? "0" : "") +
           new Date(data2.list[7].dt_txt).getMinutes()
         }`,
         icon8Date1: `https://openweathermap.org/img/wn/${data2.list[7].weather[0].icon}@2x.png`,
+        icon8Desc: data2.list[7].weather[0].main,
         time8Date1Temp: Math.round(data2.list[7].main.temp),
+        tempHigh: Math.round(data2.list[7].main.temp_max),
+        tempLow: Math.round(data2.list[7].main.temp_min),
 
         date2: `${
           dayNames[new Date(data2.list[8].dt_txt).getDay()]
@@ -474,21 +480,44 @@ export default function App() {
     }
   };
 
+  // Why the background doesn't toggle ????
+  function toggleDarkMode() {
+    setIsDark((prevIsDark) => !prevIsDark);
+  }
+  // Set background color
+  document.querySelector("body").style.backgroundColor = isDark
+    ? "#383838"
+    : "  #9E9E9E";
+
+  // Change units (imperial => metric)
+  function handleUnits() {
+    setUnits((prevUnits) => (prevUnits === "metric" ? "imperial" : "metric"));
+  }
+
+  // Display  time and date for the location fetched
+  const now = new Date();
+  const date = now.toDateString();
+  const hour = now.getHours();
+  const minutes = now.getMinutes();
+  const formattedTime = `${hour}:${(minutes < 10 ? "0" : "") + minutes}`;
+
   // console.log(futureWeatherData);
 
+  // Rerender website based on conditions
   useEffect(() => {
     getLocation();
     search(location.latitude, location.longitude);
     searchForecast(location.latitude, location.longitude);
-  }, [city]);
+  }, [city, location.latitude, location.longitude, units]);
 
+  // Handle 'Enter' on search city
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       console.log("City:", city);
       if (city.trim()) {
-        callFunction(city);
-        // search(city.trim()); // Call parent or local search function
+        // searchCity(city);
+        search(city.trim()); // Call parent or local search function
         setCity(city); // optional: clear input after search
         console.log("City:", city);
       }
@@ -500,18 +529,22 @@ export default function App() {
       <Header
         toggleDarkMode={toggleDarkMode}
         onKeyDown={handleKeyDown}
-        // city={city}
+        city={city}
+        getLocation={getLocation}
         // setCity={setCity}
         onChange={(e) => setCity(e.target.value)}
-        // getLocation={getLocation}
+        getCity={searchCity}
         // search={search(location.latitude, location.longitude)}
       />
       <Main
+        isDark={isDark}
         city={city}
         date={date}
         time={formattedTime}
         weatherData={weatherData}
         futureWeatherData={futureWeatherData}
+        handleUnits={handleUnits}
+        units={units}
       />
     </div>
   );
