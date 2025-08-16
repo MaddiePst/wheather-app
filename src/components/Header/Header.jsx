@@ -2,9 +2,15 @@
 import SearchBar from "./SearchBar";
 // import SearchResultsList from "./SearchResultsList";
 
-export default function Header({ city, onChange, onKeyDown, getLocation }) {
+export default function Header({
+  city,
+  onChange,
+  onKeyDown,
+  getLocation,
+  toggleDarkMode,
+}) {
   // function getCurLocation() {
-  //   props.getLocation();
+  //   getLocation();
   //   // props.search(props.location.latitude, props.location.longitude);
   // }
 
@@ -14,7 +20,7 @@ export default function Header({ city, onChange, onKeyDown, getLocation }) {
       <div className="toggle-container">
         <label className="toggle-label">
           <input type="checkbox" className="toggle-input" />
-          {/* <span className="slider" onClick={props.toggleDarkMode}></span> */}
+          <span className="slider" onClick={toggleDarkMode}></span>
         </label>
         <p>Dark Mode</p>
       </div>
@@ -24,10 +30,6 @@ export default function Header({ city, onChange, onKeyDown, getLocation }) {
         <div className="serarch-bar-container">
           <label className="site-search"></label>
           <SearchBar city={city} onKeyDown={onKeyDown} onChange={onChange} />
-          {/* <SearchResultsList 
-            city={props.city}
-            handleChange={props.handleChange}
-          /> */}
         </div>
       </form>
       {/* Current Location */}
