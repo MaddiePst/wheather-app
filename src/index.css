@@ -241,11 +241,12 @@ input:checked + .slider::before {
 .icon-img {
   width: 15rem;
   height: 15rem;
-  margin-left: -2.5rem;
+  margin: auto -2rem;
 }
 
 .weather-desc {
-  margin: auto 2rem;
+  /* margin: auto auto; */
+  margin: auto 3rem;
   font-size: 1.5rem;
 }
 
