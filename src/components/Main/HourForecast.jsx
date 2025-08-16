@@ -6,7 +6,7 @@ export default function HourForecast(props) {
         background: props.isDark
           ? "#292929"
           : props.iconDate === "Rain" || props.iconDesc === "Clouds"
-          ? "#443D64"
+          ? "#868e96"
           : "#f88000",
       }}
     >
