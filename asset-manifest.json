@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/wheather-app/static/css/main.f5abc8b2.css",
+    "main.js": "/wheather-app/static/js/main.87237129.js",
+    "index.html": "/wheather-app/index.html",
+    "main.f5abc8b2.css.map": "/wheather-app/static/css/main.f5abc8b2.css.map",
+    "main.87237129.js.map": "/wheather-app/static/js/main.87237129.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f5abc8b2.css",
+    "static/js/main.87237129.js"
+  ]
+}
