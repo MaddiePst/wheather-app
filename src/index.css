@@ -1,0 +1,1172 @@
+
+/* =======================
+   GENERAL
+======================= */
+* {
+  box-sizing: border-box;
+}
+
+[data-theme="light"] {
+  --writing-color: #292929;
+  --container-color: #d9d9d9;
+  --full-white-80: rgba(255, 255, 255, 0.8);
+  --full-white-60: rgba(255, 255, 255, 0.6);
+  --full-white: #ffffff;
+  --writing-color: #373636;
+  --light-black: #373636;
+  --medium-black: #383838;
+  --dark-grey: #444444;
+  --black-accent: #111111;
+  --accent-green: #4cbb17;
+  --hour-container: ;
+}
+
+[data-theme="dark"] {
+  --writing-color: #ffffff;
+  --container-color: #444444;
+  --full-white-60: #383838;
+  --full-white: #111111;
+  --medium-black: #111111;
+  /* --writing-color: #373636; */
+  --light-black: #373636;
+  --dark-grey: #d9d9d9;
+  --black-accent: #d9d9d9;
+  --accent-green: #4cbb17;
+  --hour-container: #373636;
+}
+
+body {
+  font-size: 16px;
+  margin: 0;
+  font-family: "Hanken Grotesk", Arial, sans-serif;
+  padding: 1rem;
+  height: 100vh;
+}
+
+.title-center {
+  margin: 1.5rem auto -1rem;
+  font-size: 1.6rem;
+}
+
+p {
+  color: var(--dark-grey);
+}
+/* =======================
+   HEADER
+======================= */
+header {
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+
+
+/* =====================
+   TOGGLE CONTAINER
+===================== */
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Label wraps the switch */
+.toggle-label {
+  position: relative;
+  width: 70px;
+  height: 36px;
+}
+
+/* Hide default checkbox */
+.toggle-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Slider */
+.slider {
+  position: absolute;
+  inset: 0;
+  background-color: #d1d5db;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Knob */
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+/* Checked state */
+.toggle-input:checked + .slider {
+  background-color: #000000;
+}
+
+.toggle-input:checked + .slider::before {
+  transform: translateX(32px);
+}
+
+/* Dark mode text */
+.dark-mode {
+  font-size: 14px;
+  color: #000000;
+  white-space: nowrap;
+}
+
+/* =======================
+   SEARCH & LOCATION
+======================= */
+.search-bar {
+  margin: 1rem;
+  padding: .8rem;
+  width: 40rem;
+  font-size: 1rem;
+  border-radius: 2rem;
+  border: .1rem solid var(--dark-grey);
+  box-shadow: 0 .1rem .5rem var(--dark-grey);
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .7rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 1.6rem;
+  background: var(--accent-green);
+  color: var(--full-white-80);
+  box-shadow: 0 .1rem .5rem var(--dark-grey);
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: .5rem;
+}
+
+.flex-container {
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  grid-template-columns: 1fr 1fr;
+  color: var(--writing-color);
+}
+
+/* =======================
+   MAIN
+======================= */
+
+/* =======================
+   CURRENT CITY CONTAINER
+======================= */
+.current-city-container {
+  width: 25rem;
+  height: 20rem;
+  background-color: var(--container-color);
+  border-radius: 1.88rem;
+  box-shadow: 0px 0.1rem 1rem var(--dark-grey);
+  margin: 5rem 2rem 2rem;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.writing-container {
+  text-align: center;
+}
+
+.city {
+  font-size: 1.7rem;
+}
+
+.time {
+  font-size: 6rem;
+  position: relative;
+  top: 0.8rem;
+}
+
+.date-current-city {
+  font-size: 1.5rem;
+  position: relative;
+  top: -4rem;
+}
+
+
+/* =======================
+   HIGHLIGHTS SECTION
+======================= */
+.highlights-container {
+  width: 45rem;
+  height: 20rem;
+  border-radius: 1.88rem;
+  background-color: var(--container-color);
+  box-shadow: 0px 0.1rem 1rem var(--dark-grey);
+  margin: 5rem 0 2rem 0rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.basic-info-container {
+  margin: 1rem 0.8rem 0 0.8rem;
+}
+
+.temperature {
+  font-size: 4.3rem;
+  background-color: var(--container-color);
+  color: var(--writing-color);
+  border: none;
+}
+
+.text {
+  margin: -0.5rem 0.5rem ;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.feels-temperature {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  font-weight: 700;
+}
+
+.rise-or-set-container {
+  margin: 2.5rem 0 0 0;
+}
+
+.icon-img {
+  width: 15rem;
+  height: 15rem;
+  margin: auto -2.2rem;
+}
+
+.weather-desc {
+  margin: auto 3rem;
+  font-size: 1.5rem;
+}
+
+.detail-info-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* =======================
+   Sun
+======================= */
+.sun-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 0.5fr 1fr;
+  margin: -2rem 1rem -6rem;
+}
+
+.image-container {
+  display: grid;
+  grid-template-rows: 0.5fr 0.5fr;
+  margin: 1rem 1rem;
+}
+
+.rise-or-set {
+  width: 1.8rem;
+  height: 2rem;
+  color: var(--dark-grey);
+}
+
+.arrow {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--dark-grey);
+  margin: auto;
+}
+
+h4 {
+  font-size: 1.1rem;
+  margin-bottom: -1rem;
+}
+
+/* =======================
+   FORECAST SECTION
+======================= */
+.forecast-section-container {
+  width: 25.9rem;
+  height: 22.9rem;
+  background-color: var(--container-color);
+  border-radius: 1.88rem;
+  box-shadow: 0px 0.1rem 1rem var(--dark-grey);
+  margin: 2rem 2rem;
+  display: grid;
+}
+
+/* =======================
+   FORECAST
+======================= */
+.forecast-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 4rem 1.5rem -2rem 0;
+}
+
+.icon-img-s {
+  max-width: 5rem;
+  max-height: 5rem;
+  margin-top: -3.7rem;
+  margin-left: 1rem;
+}
+
+.temp-date {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: -2.5rem 0 0 1.2rem;
+}
+
+.date {
+  font-size: 1.2rem;
+  margin-top: -2.5rem;
+  margin-left: 1rem;
+}
+
+/* =======================
+   HOURLY FORECAST
+======================= */
+.hourly-forecast-container {
+  width: 47rem;
+  height: 22.9rem;
+  background-color: var(--container-color);
+  border-radius: 1.88rem;
+  box-shadow: 0px 0.1rem 1rem var(--dark-grey);
+  margin: 2rem -2rem;
+  display: grid;
+}
+
+/* =======================
+ HOURLY
+======================= */
+.hourly-forecast {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0 2rem 0 1.5rem;
+}
+
+.hour-container {
+  width: 8rem;
+  height: 16rem;
+  box-shadow: 0px 0.2rem 0.5rem var(--dark-grey);
+  border-radius: 2rem;
+  margin-right: 1rem;
+  padding: 0 0 0 2.5rem;
+}
+
+.hour-bold {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.icon-hour {
+  width: 5rem;
+  height: 5rem;
+  margin: -1.8rem -1rem;
+}
+
+.hour-med-weight {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* =======================
+   MEDIA QUERY
+======================= */
+@media (max-width: 1240px) {
+  body {
+    font-size: 11px;
+  }
+
+  .title-center {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+  }
+
+  /* Dark/light Mode */
+  .toggle-container {
+    margin-top: 2.5rem;
+  }
+
+  .toggle-label {
+    max-width: 5rem;
+    max-height: 2.3rem;
+  }
+
+  .slider::before {
+    max-width: 1.8rem;
+    max-height: 1.8rem;
+    top: 0.1rem;
+    left: 2.9rem;
+  }
+
+  input:checked + .slider::before {
+    transform: translateX(-2.8rem);
+  }
+
+  .dark-mode {
+    font-size: 0.8rem;
+  }
+  /* Search bar */
+  .search-bar {
+    margin: 0 -5rem;
+    padding: 0.6rem;
+    max-width: 45rem;
+  }
+
+  /* Current Location */
+  .location {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .icon {
+    max-width: 1.2rem;
+    max-height: 1.2rem;
+  }
+
+  /* ***********MAIN************* */
+
+  /* CURRENT CITY CONTAINER */
+  .current-city-container {
+    max-width: 27rem;
+    max-height: 18rem;
+    margin: 1.5rem;
+  }
+
+  .city {
+    font-size: 1.3rem;
+  }
+
+  .time {
+    font-size: 5rem;
+    top: 2rem;
+  }
+
+  .date-current-city {
+    font-size: 1.1rem;
+    top: -2rem;
+  }
+
+  /* HIGHLIGHTS SECTION */
+  .highlights-container {
+    max-width: 43rem;
+    max-height: 18rem;
+    margin: 1.5rem 0.5rem;
+  }
+
+  .basic-info-container {
+    margin: 0.8rem 0.8rem 0 0.8rem;
+  }
+
+  .temperature {
+    font-size: 3.5rem;
+  }
+
+  .text {
+    margin: -0.5rem 0.5rem -0.5rem;
+    font-size: 1rem;
+  }
+
+  .feels-temperature {
+    font-size: 1.4rem;
+  }
+
+  .rise-or-set-container {
+    margin-top: 2rem;
+  }
+
+  .icon-img {
+    width: 15rem;
+    height: 15rem;
+    margin: auto -3rem;
+  }
+
+  .weather-desc {
+    margin: auto 1.2rem;
+    font-size: 1.3rem;
+  }
+
+  /* Sun */
+  .sun-container {
+    margin: -1rem 1rem -5rem;
+  }
+
+  .image-container {
+    margin: 1rem 1rem;
+  }
+
+  .rise-or-set {
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+  }
+
+  .arrow {
+    max-width: 1.1rem;
+    max-height: 1.1rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+    margin-bottom: -0.5rem;
+  }
+
+  /* FORECAST SECTION */
+
+  .forecast-section-container {
+    max-width: 20rem;
+    max-height: 18rem;
+    margin: 1rem 1.5rem;
+  }
+
+  /* Forecast */
+  .icon-img-s {
+    max-width: 4rem;
+    max-height: 4rem;
+  }
+
+  .temp-date {
+    font-size: 1.2rem;
+    margin: -2.5rem 0 0 1rem;
+  }
+
+  .date {
+    font-size: 1rem;
+    margin-top: -2.5rem;
+    margin-left: 0rem;
+  }
+
+  /* HOURLY FORECAST */
+
+  .hourly-forecast-container {
+    max-width: 49rem;
+    max-height: 18rem;
+    margin: 1rem -5.8rem;
+  }
+
+  /* Hour Forecast */
+  .hourly-forecast {
+    margin: 0.7rem 2rem 0 2rem;
+  }
+
+  .hour-container {
+    max-width: 7rem;
+    max-height: 14rem;
+    padding-left: 2rem;
+  }
+
+  .hour-bold {
+    font-size: 1.1rem;
+  }
+
+  .icon-hour {
+    max-width: 4.5rem;
+    max-height: 4.5rem;
+    margin: -1.8rem -0.8rem;
+  }
+
+  .hour-med-weight {
+    font-size: 1rem;
+    margin-left: -0.5rem;
+  }
+}
+
+@media (max-width: 800px) {
+  body {
+    font-size: 9px;
+    padding: 0;
+  }
+
+  .title-center {
+    margin: 0.8rem auto;
+    font-size: 0.9rem;
+  }
+
+  /* ***********HEADER**************/
+
+  header {
+    margin-left: 1rem;
+    gap: 6rem;
+  }
+
+  /* Dark/light Mode */
+  .toggle-container {
+    margin-top: 1.8rem;
+  }
+
+  .toggle-label {
+    max-width: 3.5rem;
+    max-height: 1.8rem;
+  }
+
+  .slider::before {
+    max-width: 1.4rem;
+    max-height: 1.4rem;
+    top: 0.07rem;
+    left: 1.8rem;
+  }
+
+  input:checked + .slider::before {
+    transform: translateX(-1.7rem);
+  }
+
+  .dark-mode {
+    font-size: 0.6rem;
+  }
+  /* Search bar */
+  .search-bar {
+    margin: 0 -4rem;
+    padding: 0.3rem;
+    max-width: 30rem;
+    font-size: 0.8rem;
+  }
+
+  /* Current Location */
+  .location {
+    padding: 0.3rem 0.2rem;
+    margin: 0;
+    font-size: 0.6rem;
+  }
+
+  .icon {
+    width: 0.8rem;
+    height: 0.8rem;
+    margin-right: 0.2rem;
+  }
+
+  /* ***********MAIN************* */
+
+  /* CURRENT CITY CONTAINER */
+  .current-city-container {
+    max-width: 15rem;
+    max-height: 12rem;
+    margin: 1rem 0.5rem;
+  }
+
+  .city {
+    font-size: 1.1rem;
+    margin-top: 0.8rem;
+  }
+
+  .time {
+    font-size: 3rem;
+    margin-top: 3rem;
+  }
+
+  .date-current-city {
+    font-size: 0.8rem;
+    top: -0.5rem;
+  }
+
+  /* HIGHLIGHTS SECTION */
+  .highlights-container {
+    max-width: 29rem;
+    max-height: 12rem;
+    margin: 1rem -5rem;
+  }
+
+  .basic-info-container {
+    margin: 0.3rem 0.4rem 0 0.8rem;
+  }
+
+  .temperature {
+    font-size: 3rem;
+  }
+
+  .text {
+    font-size: 0.8rem;
+    margin-left: 0rem;
+  }
+
+  .feels-temperature {
+    font-size: 1rem;
+  }
+
+  .rise-or-set-container {
+    margin: 1.5rem -0.5rem;
+  }
+
+  .icon-img {
+    width: 10rem;
+    height: 10rem;
+    margin: -1rem -2rem;
+  }
+
+  .weather-desc {
+    margin: 1rem 1rem;
+    font-size: 1.1rem;
+  }
+
+  /* Sun */
+  .sun-container {
+    margin: -1.4rem 0.2rem -5.5rem;
+  }
+
+  .rise-or-set {
+    max-width: 1rem;
+    max-height: 1rem;
+  }
+
+  .arrow {
+    max-width: 0.8rem;
+    max-height: 1rem;
+  }
+
+  h4 {
+    font-size: 0.7rem;
+    margin-bottom: -0.4rem;
+  }
+
+  /* FORECAST SECTION */
+
+  .forecast-section-container {
+    max-width: 13rem;
+    max-height: 12rem;
+    margin: 0.5rem 0.5rem;
+  }
+
+  /* Forecast */
+  .forecast-container {
+    margin: 0.7rem 0.6rem 1.2rem 0;
+  }
+
+  .icon-img-s {
+    max-width: 2rem;
+    max-height: 2rem;
+    margin: -1.3rem 0 0 0.5rem;
+  }
+
+  .temp-date {
+    font-size: 0.8rem;
+    margin: -0.7rem 0 0 -0.3rem;
+  }
+
+  .date {
+    font-size: 0.7rem;
+    margin: -0.7rem 0 0 -0.5rem;
+  }
+
+  /* HOURLY FORECAST */
+
+  .hourly-forecast-container {
+    max-width: 33rem;
+    max-height: 12rem;
+    margin: 0.5rem -9rem;
+  }
+
+  /* Hour Forecast */
+
+  .hourly-forecast {
+    margin: 0 2rem;
+  }
+
+  .hour-container {
+    max-width: 5rem;
+    max-height: 9rem;
+    padding-left: 2rem;
+    border-radius: 2.2rem;
+    margin: -5rem 0;
+    padding: 0 0 0 3rem;
+  }
+
+  .hour-bold {
+    font-size: 0.8rem;
+    margin: 0.5rem 0 0.5rem -1.3rem;
+  }
+
+  .icon-hour {
+    max-width: 3.5rem;
+    max-height: 3.5rem;
+    margin: -1rem -2.3rem;
+  }
+
+  .hour-med-weight {
+    font-size: 0.6rem;
+    margin-left: -1.5rem;
+  }
+}
+
+@media (max-width: 720px) {
+  body {
+    font-size: 5px;
+  }
+
+  .title-center {
+    font-size: 0.8rem;
+  }
+
+  /* ***********HEADER**************/
+
+  /* Dark/light Mode */
+  .toggle-container {
+    margin-top: 1.2rem;
+  }
+  .toggle-label {
+    max-width: 2rem;
+    max-height: 1rem;
+    border: solid 0.1rem var(--light-black);
+  }
+
+  .slider::before {
+    width: 0.7rem;
+    height: 0.7rem;
+    left: 1.1rem;
+  }
+
+  input:checked + .slider::before {
+    transform: translateX(-1rem);
+  }
+
+  /* Search bar */
+  .search-bar {
+    margin: -1rem 0 0 -4rem;
+    max-width: 22rem;
+    font-size: 0.5rem;
+  }
+
+  /* Current Location */
+  .location {
+    margin: -0.5rem 0 0 0;
+    font-size: 0.5rem;
+    border: none;
+  }
+  /* ***********MAIN************* */
+
+  /* CURRENT CITY CONTAINER */
+  .current-city-container {
+    max-width: 10rem;
+    max-height: 10rem;
+  }
+
+  .city {
+    font-size: 0.8rem;
+  }
+
+  .time {
+    font-size: 2rem;
+    top: -0.5rem;
+  }
+
+  .date-current-city {
+    font-size: 0.6rem;
+    top: -2.2rem;
+  }
+
+  /* HIGHLIGHTS SECTION */
+  .highlights-container {
+    max-width: 25rem;
+    max-height: 10rem;
+    margin: 0.8rem 4rem;
+  }
+
+  .temperature {
+    font-size: 1.7rem;
+  }
+
+  .text {
+    margin: -0.3rem 0rem -1.3rem;
+    font-size: 0.6rem;
+  }
+
+  .feels-temperature {
+    font-size: 0.7rem;
+    margin-right: 1rem;
+  }
+
+  .rise-or-set-container {
+    margin: 1.8rem 0 0 -0.8rem;
+  }
+
+  .icon-img {
+    max-width: 6rem;
+    max-height: 6rem;
+    margin: auto -1rem;
+  }
+
+  .weather-desc {
+    margin: auto 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  /* Sun */
+
+  .sun-container {
+    margin: -1rem 0.2rem -5rem;
+  }
+
+  .image-container {
+    margin: 0rem 0.8rem 1.8rem;
+  }
+
+  .rise-or-set {
+    max-width: 0.8rem;
+    max-height: 0.8rem;
+    margin: 0.1rem;
+  }
+
+  .arrow {
+    max-width: 0.8rem;
+    max-height: 0.8rem;
+    margin-top: 0.2rem;
+  }
+
+  h4 {
+    font-size: 0.6rem;
+    margin-bottom: -0.1rem;
+  }
+  /* FORECAST SECTION */
+  .forecast-section-container {
+    max-width: 10rem;
+    max-height: 10rem;
+  }
+
+  /* Forecast */
+  .forecast-container {
+    margin: 1.3rem 0.6rem 0 0;
+  }
+
+  .icon-img-s {
+    margin-top: -2rem;
+    margin-left: 0.2rem;
+  }
+
+  .temp-date {
+    font-size: 0.7rem;
+    margin: -1.3rem 0 0 0;
+  }
+
+  .date {
+    font-size: 0.6rem;
+    margin-top: -1.3rem;
+  }
+
+  /* HOURLY FORECAST */
+  .hourly-forecast-container {
+    max-width: 28rem;
+    max-height: 10rem;
+    margin: 0.5rem 1rem;
+  }
+
+  /* Hour Forecast */
+  .hourly-forecast {
+    margin: 0 auto;
+  }
+
+  .hour-container {
+    max-width: 3.5rem;
+    max-height: 7.5rem;
+    margin: -1rem 0 0 1rem;
+    padding: 0 0 0 2.4rem;
+  }
+
+  .hour-bold {
+    font-size: 0.7rem;
+  }
+
+  .icon-hour {
+    max-width: 3rem;
+    max-height: 3rem;
+    margin: -1.8rem -2.2rem;
+  }
+
+  .hour-temp {
+    margin-top: 1.5rem;
+  }
+
+  .hour-med-weight {
+    font-size: 0.6rem;
+    margin-top: -0.3rem;
+  }
+}
+
+@media (max-width: 460px) {
+  .title-center {
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+  }
+  /* ***********HEADER**************/
+
+  header {
+    gap: 5rem;
+  }
+  /* Dark/light Mode */
+  .toggle-container {
+    margin-top: 1.5rem;
+  }
+
+  /* Search bar */
+  .search-bar {
+    padding: 0.2rem;
+    max-width: 15rem;
+    font-size: 0.6rem;
+  }
+  /* Current Location */
+  .location {
+    margin-left: -4rem;
+    padding: 0.2rem;
+    font-size: 0.5rem;
+  }
+
+  .icon {
+    max-width: 0.6rem;
+    max-height: 0.6rem;
+  }
+
+  /* ***********MAIN************* */
+  .flex-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 1fr 0.8fr 1fr;
+  }
+
+  /* CURRENT CITY CONTAINER */
+  .current-city-container {
+    max-width: 26rem;
+    max-height: 2rem;
+    margin: 0.2rem 0.4rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 1.5fr 1rem 1rem;
+  }
+
+  .city {
+    font-size: 0.8rem;
+    margin: 0.6rem 0 0 -19rem;
+  }
+  .time {
+    font-size: 1rem;
+    margin: -0.6rem 0 0 -4rem;
+  }
+
+  .date-current-city {
+    font-size: 0.6rem;
+    margin: 0.8rem 0 0 13rem;
+  }
+
+  /* HIGHLIGHTS SECTION */
+  .highlights-container {
+    max-width: 26rem;
+    max-height: 8rem;
+    margin: 0.6rem 0.4rem;
+  }
+  .temperature {
+    font-size: 1.4rem;
+  }
+
+  .text {
+    font-size: 0.5rem;
+  }
+  .feels-temperature {
+    font-size: 0.6rem;
+  }
+  .rise-or-set-container {
+    margin: 2rem 0 0 -0.8rem;
+  }
+
+  .icon-img {
+    max-width: 9rem;
+    max-height: 9rem;
+    margin: -1.3rem -3rem;
+  }
+
+  .weather-desc {
+    margin: -0.5rem 0rem;
+    font-size: 0.9rem;
+  }
+  /* Sun */
+  .sun-container {
+    margin: -1.5rem 0 -5rem;
+  }
+
+  .image-container {
+    max-width: 0.9rem;
+    max-height: 0.9rem;
+    margin: 1.1rem 0.2rem 1.5rem 1rem;
+  }
+
+  .rise-or-set {
+    max-width: 0.7rem;
+    max-height: 0.7rem;
+    margin-top: -0.1rem;
+  }
+
+  .arrow {
+    max-width: 0.7rem;
+    max-height: 0.7rem;
+    margin-top: -0.6rem;
+  }
+
+  h4 {
+    font-size: 0.4rem;
+    margin-bottom: 0.3rem;
+  }
+  /* FORECAST SECTION */
+  .forecast-section-container {
+    max-width: 26rem;
+    max-height: 6.5rem;
+    margin: 0.1rem 0.5rem;
+  }
+
+  /* Forecast */
+  .outside-forecast-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin: 0.6rem 0 0 0;
+  }
+  .forecast-container {
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 1.8rem 1rem -0.7rem 0;
+  }
+  .icon-img-s {
+    margin-top: -3.3rem;
+    margin-left: 0.5rem;
+  }
+
+  .temp-date {
+    margin: -2.8rem 0 0 -0.5rem;
+  }
+
+  .date {
+    margin-top: -2.8rem;
+    margin-left: -1rem;
+  }
+  /* HOURLY FORECAST */
+  .hourly-forecast-container {
+    max-width: 26rem;
+    max-height: 9rem;
+    margin: 0.1rem 0.4rem;
+  }
+
+  /* Hour Forecast */
+  .hourly-forecast {
+    margin: 0 0 0 0;
+  }
+
+  .hour-container {
+    max-width: 3.5rem;
+    max-height: 6rem;
+    border-radius: 1.4rem;
+    padding: 0 0 0 2.3rem;
+  }
+
+  .hour-bold {
+    font-size: 0.65rem;
+  }
+
+  .hour-med-weight {
+    font-size: 0.4rem;
+    margin-left: -1.3rem;
+  }
+}
